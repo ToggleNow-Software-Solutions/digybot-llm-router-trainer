@@ -1,10 +1,12 @@
 """Integration test: run trainer for 1 step and verify model is saved."""
 
 from pathlib import Path
+import pytest
 import subprocess
 import sys
 
 
+@pytest.fixture(scope="session")
 def test_train_smoke(tiny_cfg_path, tmp_path):
     """
     End‑to‑end check: run the CLI for 1 step and confirm

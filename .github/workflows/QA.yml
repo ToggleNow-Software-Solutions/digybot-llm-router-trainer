@@ -14,31 +14,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # lint:
-  #   name: Code Linting (Pylint + Ruff + Black)
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  lint:
+    name: Code Linting (Pylint + Ruff + Black)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.10"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         pip install -e ".[dev]"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
 
-  #     - name: Run Pylint
-  #       run: pylint $(git ls-files '*.py')
+      - name: Run Pylint
+        run: pylint $(git ls-files '*.py')
 
-  #     - name: Run Black check (code formatting)
-  #       run: black --check src/ tests/
+      - name: Run Black check (code formatting)
+        run: black --check src/ tests/
 
-  #     - name: Run Ruff (linter + autofix checker)
-  #       run: ruff check src/ tests/
+      - name: Run Ruff (linter + autofix checker)
+        run: ruff check src/ tests/
 
   # test:
   #   name: Unit Tests
@@ -93,7 +93,7 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install project and pip-licenses
+      - name: Install project dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -e .[dev]

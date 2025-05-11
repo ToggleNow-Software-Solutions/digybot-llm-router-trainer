@@ -30,7 +30,8 @@ dev = [
   "pytest-cov>=5.0",
   "black>=24.0",
   "ruff>=0.4",
-  "mypy>=1.8"
+  "mypy>=1.8",
+  "pip-licenses==5.0.0"
 ]
 
 docs = [
@@ -42,6 +43,8 @@ train = [
   "scipy>=1.11",
   "scikit-learn>=1.4"
 ]
+[tool.setuptools.package-data]
+"llama_finetune" = ["py.typed"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

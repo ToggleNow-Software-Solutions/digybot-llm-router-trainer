@@ -3,7 +3,10 @@
 from transformers import PreTrainedTokenizerBase, PreTrainedModel
 from unsloth import FastLanguageModel
 
-def load_base(model_name: str, dtype="float16") -> tuple[PreTrainedModel, PreTrainedTokenizerBase]:
+
+def load_base(
+    model_name: str, dtype="float16"
+) -> tuple[PreTrainedModel, PreTrainedTokenizerBase]:
     """Load a base LLaMA model and tokenizer using Unsloth."""
     model, tok = FastLanguageModel.from_pretrained(
         model_name,
@@ -11,6 +14,7 @@ def load_base(model_name: str, dtype="float16") -> tuple[PreTrainedModel, PreTra
         load_in_4bit=True,
     )
     return model, tok
+
 
 def add_lora(
     model: PreTrainedModel,

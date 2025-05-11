@@ -5,9 +5,11 @@ from dataclasses import dataclass
 from pathlib import Path
 import yaml
 
+
 @dataclass(frozen=True, slots=True)
 class TrainConfig:
     """All config values used during training."""
+
     run_name: str
     base_model: str
     dataset_path: str

@@ -11,6 +11,7 @@ from llama_finetune.config import TrainConfig
 from llama_finetune.data_utils import load_sharegpt, format_chat
 from llama_finetune.model_utils import load_base, add_lora
 
+
 def main(cfg_path: str):
     """Run training loop using config from YAML."""
     cfg = TrainConfig.load(cfg_path)
@@ -34,12 +35,12 @@ def main(cfg_path: str):
         warmup_steps=cfg.warmup_steps,
         fp16=True,
         logging_steps=1,
-        output_dir=cfg.output_dir,\
+        output_dir=cfg.output_dir,
         optim="adamw_8bit",
         report_to="none",
         weight_decay=0.01,
         lr_scheduler_type="linear",
-        seed=3407
+        seed=3407,
     )
 
     trainer = SFTTrainer(
@@ -63,6 +64,7 @@ def main(cfg_path: str):
     trainer.train()
     trainer.save_model(cfg.output_dir)
     rich.print(f"[bold cyan]Model saved to {cfg.output_dir}[/bold cyan]")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fine‑tune LLaMA with LoRA")

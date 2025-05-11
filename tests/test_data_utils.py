@@ -3,6 +3,7 @@
 from transformers import AutoTokenizer
 from llama_finetune.data_utils import load_sharegpt, format_chat
 
+
 def test_sharegpt_load_and_format(tiny_cfg):
     """Ensure dataset loads and chat formatting returns expected fields."""
 
@@ -13,5 +14,9 @@ def test_sharegpt_load_and_format(tiny_cfg):
 
     ds_fmt = format_chat(ds, tok)
     assert "text" in ds_fmt.column_names
-    # Each formatted string must start with the user header
-    assert ds_fmt[0]["text"].startswith("<|start_header_id|>user")
+    # Now we expect the Inst-style template: <s>[INST] … [/INST] … </s>
+    text0 = ds_fmt[0]["text"]
+    # should begin with the BOS token + “[INST]”
+    assert text0.startswith(f"{tok.bos_token}[INST]"), text0
+    # and should end with the EOS token
+    assert text0.strip().endswith(tok.eos_token), text0

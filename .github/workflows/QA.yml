@@ -1,0 +1,77 @@
+name: Pylint
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - .github/workflows/**
+
+concurrency:
+  # cancel any running action on new push
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Code Linting (Pylint + Ruff + Black)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python and install dependencies
+        uses: ./.github/actions/setup-python
+
+      - name: Run Pylint
+        run: pylint $(git ls-files '*.py')
+
+      - name: Run Black check (code formatting)
+        run: black --check src/ tests/
+
+      - name: Run Ruff (linter + autofix checker)
+        run: ruff check src/ tests/
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python and install dependencies
+        uses: ./.github/actions/setup-python
+
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=src --cov-report=term-missing
+
+  typecheck:
+    name: Static Type Checking (mypy)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python and install dependencies
+        uses: ./.github/actions/setup-python
+
+      - name: Run mypy
+        run: mypy --ignore-missing-imports -p llama_finetune -p tests
+
+  license-audit:
+    name: Dependency License Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python and install dependencies
+        uses: ./.github/actions/setup-python
+
+      - name: Run license check
+        run: |
+          pip-licenses \
+          --allow-only="Python Software Foundation License;MIT License;MIT OR X11;BSD License;ISC;Apache-2.0;Python-2.0;The Unlicense (Unlicense);CC0-1.0;BlueOak-1.0.0;CC-BY-3.0;CC-BY-4.0;LGPL-3.0-or-later;Apache Software License;UNKNOWN;Mozilla Public License 2.0 (MPL 2.0);Other/Proprietary License;BSD-3-Clause;BSD;NVIDIA Proprietary Software" \
+          --format=markdown

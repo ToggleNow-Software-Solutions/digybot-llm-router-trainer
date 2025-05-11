@@ -1,7 +1,11 @@
-from llama_finetune.data_utils import load_sharegpt, format_chat
-from transformers import AutoTokenizer
+"""Unit tests for the data_utils module."""
 
-def test_sharegpt_load_and_format(tmp_path, tiny_cfg):
+from transformers import AutoTokenizer
+from llama_finetune.data_utils import load_sharegpt, format_chat
+
+def test_sharegpt_load_and_format(tiny_cfg):
+    """Ensure dataset loads and chat formatting returns expected fields."""
+
     # Load a tiny tokenizer to keep speed
     tok = AutoTokenizer.from_pretrained("hf-internal-testing/llama-tokenizer")
     ds = load_sharegpt(tiny_cfg.dataset_path)

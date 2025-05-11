@@ -1,0 +1,44 @@
+[MASTER]
+# Allow linting all files recursively and follow symlinks
+ignore=.venv
+load-plugins=pylint.extensions.docparams
+
+[MESSAGES CONTROL]
+# Disable specific warnings globally
+disable=
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    too-few-public-methods,
+    too-many-instance-attributes,
+    too-many-arguments,
+    invalid-name,
+    import-error,          # handled by proper deps / mypy
+    duplicate-code         # safe to ignore in short scripts
+
+[FORMAT]
+max-line-length=100
+indent-string='    '
+
+[DESIGN]
+# Allow more attributes in config or data classes
+max-attributes=15
+max-args=10
+
+[TYPECHECK]
+# Disable checking for optional imports in __main__ or test files
+ignored-modules=yaml
+
+[REPORTS]
+output-format=colorized
+reports=no
+
+[REFACTORING]
+max-nested-blocks=5
+
+[VARIABLES]
+# Allow common throwaway variables like `_` and `__`
+ignored-argument-names=_.*|^__.*__$
+
+[LOGGING]
+logging-format-style=old

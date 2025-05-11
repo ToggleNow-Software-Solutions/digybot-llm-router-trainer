@@ -1,0 +1,14 @@
+run_name: test-tiny-run
+base_model: "hf-internal-testing/tiny-random-LlamaForCausalLM"
+dataset_path: "tests/assets/tiny_dataset.json"
+output_dir: "tests/output"
+batch_size: 1
+grad_accum: 1
+learning_rate: 1.0e-4
+max_steps: 1          #  ⟵ key speed‑up
+warmup_steps: 0
+max_seq_length: 64
+lora_r: 4
+lora_alpha: 4
+target_modules: ["q_proj", "k_proj", "v_proj", "o_proj"]
+random_state: 1234

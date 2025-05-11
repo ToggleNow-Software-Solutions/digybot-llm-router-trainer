@@ -1,0 +1,15 @@
+[
+    {
+      "conversations": [
+        { "from": "human", "value": "Hello, who are you?" },
+        { "from": "gpt",   "value": "I’m a tiny test model." }
+      ]
+    },
+    {
+      "conversations": [
+        { "from": "human", "value": "Tell me a joke" },
+        { "from": "gpt",   "value": "Why did the LLM cross the road? To fine‑tune the other side!" }
+      ]
+    }
+  ]
+  

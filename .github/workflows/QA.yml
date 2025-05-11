@@ -93,17 +93,15 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install licensecheck
+      - name: Install project and pip-licenses
         run: |
-          pip install licensecheck
-
-      - name: Install project (without extras)
-        run: |
-          pip install -e .
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+          pip install pip-licenses
 
       - name: Run license check
         run: |
-          licensecheck --allow-only \
+          pip-licenses --allow-only \
             "MIT" \
             "MIT OR X11" \
             "BSD" \
@@ -116,4 +114,6 @@ jobs:
             "BlueOak-1.0.0" \
             "CC-BY-3.0" \
             "CC-BY-4.0" \
-            "LGPL-3.0-or-later"
+            "LGPL-3.0-or-later" \
+            --fail-on \
+            --format=markdown

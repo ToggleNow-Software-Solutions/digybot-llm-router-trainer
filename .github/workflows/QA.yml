@@ -101,5 +101,5 @@ jobs:
       - name: Run license check
         run: |
           pip-licenses \
-          --allow-only="Python Software Foundation License;MIT License;MIT OR X11;BSD License;ISC;Apache-2.0;Python-2.0;The Unlicense (Unlicense);CC0-1.0;BlueOak-1.0.0;CC-BY-3.0;CC-BY-4.0;LGPL-3.0-or-later;Apache Software License;UNKNOWN;Mozilla Public License 2.0 (MPL 2.0);Other/Proprietary" \
+          --allow-only="Python Software Foundation License;MIT License;MIT OR X11;BSD License;ISC;Apache-2.0;Python-2.0;The Unlicense (Unlicense);CC0-1.0;BlueOak-1.0.0;CC-BY-3.0;CC-BY-4.0;LGPL-3.0-or-later;Apache Software License;UNKNOWN;Mozilla Public License 2.0 (MPL 2.0);Other/Proprietary License" \
           --format=markdown

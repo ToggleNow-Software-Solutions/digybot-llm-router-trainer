@@ -81,18 +81,39 @@ jobs:
       - name: Run mypy
         run: mypy src/ tests/
 
-  license:
-    name: License Check
+  license-audit:
+    name: Dependency License Audit
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Scan for license headers
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install licensecheck
         run: |
-          missing=$(grep -L "SPDX-License-Identifier" $(git ls-files '*.py') || true)
-          if [ -n "$missing" ]; then
-            echo "❌ Missing license headers in:"
-            echo "$missing"
-            exit 1
-          fi
+          pip install licensecheck
+
+      - name: Install project (without extras)
+        run: |
+          pip install -e .
+
+      - name: Run license check
+        run: |
+          licensecheck --allow-only \
+            "MIT" \
+            "MIT OR X11" \
+            "BSD" \
+            "ISC" \
+            "Apache-2.0" \
+            "Python-2.0" \
+            "Unlicense" \
+            "CC0-1.0" \
+            "MPL-2.0" \
+            "BlueOak-1.0.0" \
+            "CC-BY-3.0" \
+            "CC-BY-4.0" \
+            "LGPL-3.0-or-later"

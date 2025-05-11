@@ -1,9 +1,10 @@
 """Integration test: run trainer for 1 step and verify model is saved."""
 
 from pathlib import Path
-import pytest
 import subprocess
 import sys
+
+import pytest
 
 
 @pytest.fixture(scope="session")

@@ -1,3 +1,4 @@
+# pylint: disable=redefined-outer-name
 """Shared pytest fixtures for testing configuration and assets."""
 
 from pathlib import Path
@@ -17,6 +18,6 @@ def tiny_cfg_path_fixture() -> Path:
 @pytest.fixture(scope="session")
 def tiny_cfg(
     tiny_cfg_path_fixture,
-) -> TrainConfig:  # pylint: disable=redefined-outer-name
+) -> TrainConfig:
     """Loads the TrainConfig from the test YAML file."""
     return TrainConfig.load(tiny_cfg_path_fixture)

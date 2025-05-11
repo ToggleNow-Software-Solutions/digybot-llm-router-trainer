@@ -1,10 +1,13 @@
-from __future__ import annotations
+# pylint: disable=too-many-instance-attributes
+"""Config dataclass for loading training parameters from a YAML file."""
+
 from dataclasses import dataclass
-import yaml
 from pathlib import Path
+import yaml
 
 @dataclass(frozen=True, slots=True)
 class TrainConfig:
+    """All config values used during training."""
     run_name: str
     base_model: str
     dataset_path: str
@@ -22,6 +25,7 @@ class TrainConfig:
 
     @staticmethod
     def load(path: str | Path) -> "TrainConfig":
+        """Load a YAML config file and return a validated dataclass."""
         with open(path, "r") as f:
             data = yaml.safe_load(f)
         return TrainConfig(**data)

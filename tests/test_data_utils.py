@@ -3,6 +3,7 @@
 from transformers import AutoTokenizer
 from llama_finetune.data_utils import load_sharegpt, format_chat
 
+
 def test_sharegpt_load_and_format(tiny_cfg):
     """Ensure dataset loads and chat formatting returns expected fields."""
 

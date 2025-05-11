@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 
+
 def test_train_smoke(tiny_cfg_path, tmp_path):
     """
     End‑to‑end check: run the CLI for 1 step and confirm

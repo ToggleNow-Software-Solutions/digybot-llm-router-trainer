@@ -26,6 +26,6 @@ class TrainConfig:
     @staticmethod
     def load(path: str | Path) -> "TrainConfig":
         """Load a YAML config file and return a validated dataclass."""
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return TrainConfig(**data)

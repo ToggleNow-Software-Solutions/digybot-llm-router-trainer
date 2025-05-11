@@ -1,11 +1,10 @@
-from __future__ import annotations
+"""Helpers to load and format chat-style datasets for LLaMA fine-tuning."""
+
 from datasets import load_dataset, Dataset
-import pandas as pd
 from transformers import PreTrainedTokenizerBase
 
 def load_sharegpt(path: str) -> Dataset:
     """Load a ShareGPT‑style JSON list into `Dataset`."""
-     """Load ShareGPT-style JSON file into a Hugging Face Dataset."""
     raw = load_dataset("json", data_files=path, split="train")
     return raw
 

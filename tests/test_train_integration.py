@@ -4,17 +4,14 @@ from pathlib import Path
 import subprocess
 import sys
 
-import pytest
 
-
-@pytest.fixture(scope="session")
-def test_train_smoke(tiny_cfg_path, tmp_path):
+def test_train_smoke(tiny_cfg_path_fixture, tmp_path):
     """
     End‑to‑end check: run the CLI for 1 step and confirm
     a model + adapter are saved to output_dir.
     """
     # Redirect output dir to a temp path to avoid clutter
-    cfg_text = Path(tiny_cfg_path).read_text(encoding="utf-8")
+    cfg_text = Path(tiny_cfg_path_fixture).read_text(encoding="utf-8")
     # We only need to adjust the YAML string—not ideal but trivial and fast:
     cfg_text = cfg_text.replace("tests/output", str(tmp_path / "model"))
     cfg_path = tmp_path / "temp_cfg.yaml"
